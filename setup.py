@@ -15,9 +15,12 @@
 import os.path
 import glob
 
+
 from distribute_setup import use_setuptools
 use_setuptools()
 from setuptools import setup, find_packages
+
+
 
 project_path = lambda *names: os.path.join(os.path.dirname(__file__), *names)
 
@@ -51,6 +54,5 @@ setup(
         "zc.buildout",
         "zc.recipe.cmmi"
     ],
-    data_files = [("", glob.glob(project_path("*.txt")))],
     zip_safe=True,
     )
