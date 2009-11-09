@@ -1,0 +1,20 @@
+Metadata-Version: 1.0
+Name: buildout-couchdb
+Version: 0.1
+Summary: ZC buildout recipe for Apache CouchDB server
+Home-page: http://github.com/benoitc/buildout_couchdb
+Author: Benoit Chesneau
+Author-email: benoitc@e-engura.com
+License: Apache License 2
+Description: ZC buildout recipe for Apache CouchDB server
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Other Environment
+Classifier: Framework :: Buildout
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Database
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: System :: Software Distribution

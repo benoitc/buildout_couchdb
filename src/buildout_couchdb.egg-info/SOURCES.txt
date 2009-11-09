@@ -1,0 +1,10 @@
+setup.py
+src/buildout_couchdb/__init__.py
+src/buildout_couchdb/tests.py
+src/buildout_couchdb.egg-info/PKG-INFO
+src/buildout_couchdb.egg-info/SOURCES.txt
+src/buildout_couchdb.egg-info/dependency_links.txt
+src/buildout_couchdb.egg-info/entry_points.txt
+src/buildout_couchdb.egg-info/requires.txt
+src/buildout_couchdb.egg-info/top_level.txt
+src/buildout_couchdb.egg-info/zip-safe

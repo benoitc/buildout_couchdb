@@ -1,0 +1,63 @@
+=================================================================
+buildout_couchdb - Build the Apache CouchDB server software
+=================================================================
+
+The couchdb recipe downloads the source code of the Apache CouchDB server software
+and builds it using a standard configure/make/make install process.
+
+To demonstrate the recipe, we create a minimalistic fake source archive that
+allows us to watch it being built, and determine its MD5 checksum:
+
+    >>> src = tmpdir('src')
+    >>> couchdb_dir = join(src, 'couchdb')
+    >>> mkdir(couchdb_dir)
+
+    >>> write(couchdb_dir, 'configure', """\
+    ... #!/bin/sh
+    ... echo configuring couchdb: $@
+    ... cp Makefile.in Makefile
+    ... """)
+    >>> import os
+    >>> os.chmod(join(couchdb_dir, 'configure'), 0754)
+
+    >>> write(couchdb_dir, 'Makefile.in', """\
+    ... all:
+    ... \t@echo building couchdb
+    ... dev:
+    ... \t@echo installing couchdb dev
+    ... """)
+
+    >>> mkdir('download')
+    >>> _ = system('tar czf download/couchdb.tar.gz -C %s couchdb' % src)
+    >>> rmdir(src)
+
+    >>> import hashlib
+    >>> checksum = hashlib.md5(open('download/couchdb.tar.gz').read())
+    >>> md5sum = checksum.hexdigest()
+
+Now we can configure a buildout that has a part which builds this fake couchdb.
+Note that the couchdb recipe enables building Apache modules as shared objects:
+
+    >>> write('buildout.cfg', """\
+    ... [buildout]
+    ... parts = couchdb
+    ...
+    ... [couchdb]
+    ... recipe = buildout_couchdb
+    ... url = file://${buildout:directory}/download/couchdb.tar.gz
+    ... md5sum = %s
+    ... """ % md5sum)
+    >>> print system("bin/buildout")
+    Installing couchdb.
+    couchdb: Unpacking and configuring
+    configuring couchdb: --prefix=/sample-buildout/parts/couchdb
+    building couchdb
+    installing couchdb dev
+    <BLANKLINE>
+
+The couchdb recipe exports a number of options in order to set the
+local.ini of CouchDB.
+
+.. Local Variables:
+.. mode: rst
+.. End:

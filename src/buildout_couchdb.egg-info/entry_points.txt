@@ -1,0 +1,3 @@
+[zc.buildout]
+default = buildout_couchdb:Recipe
+
